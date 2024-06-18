@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang='pt-br'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Livraria Miúda</title>
+    <style>
+        /* Estilo para o header branco */
+        header {
+          background-color: white;
+          height: 100px;
+          border-bottom: 1px solid #ccc;
+          display: flex;
+          align-items: center;
+          padding: 0 20px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          font-weight: bold;
+          font-family: Helvetica, sans-serif;
+        }
+
+        /* Estilos para as linhas animadas */
+        .lines-container {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .line {
+          height: 5px;
+          transition: height 0.6s;
+        }
+
+        #line1 {
+          background-color: #FDBB13;
+        }
+
+        #line2 {
+          background-color: #153383;
+        }
+
+        #line3 {
+          background-color: #C84567;
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: height 0.6s;
+        }
+
+        /* Estilo para os textos das categorias */
+        .category-text {
+          margin: 0 10px;
+          color: white;
+          font-weight: bold;
+          font-family: Helvetica, sans-serif;
+          opacity: 0;
+          transition: opacity 0.6s;
+        }
+
+        /* Animação ao passar o mouse */
+        .lines-container .line:hover {
+          height: 30px;
+        }
+
+        /* Aumentar a altura da linha 3 */
+        .lines-container #line3:hover {
+          height: 60px;
+        }
+
+        /* Recolhimento das linhas anteriores */
+        .lines-container #line2:hover ~ #line1 {
+          height: 5px;
+        }
+
+        .lines-container #line3:hover ~ #line1,
+        .lines-container #line3:hover ~ #line2 {
+          height: 5px;
+        }
+
+        /* Aparecimento dos textos das categorias quando a linha rosa está expandida */
+        .lines-container #line3:hover .category-text {
+          opacity: 1;
+        }
+
+        /* Centralizar textos das categorias */
+        .lines-container #line3 {
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Livraria Miúda</h1>
+</header>
+
+<div class="lines-container">
+    <div id="line1" class="line"></div>
+    <div id="line2" class="line"></div>
+    <div id="line3" class="line">
+        <div class="category-text">Livros de séries populares</div>
+        <div class="category-text">Livros de figuras</div>
+        <div class="category-text">Livros de fábulas</div>
+        <div class="category-text">Livros de poesia</div>
+        <div class="category-text">Livros de aventuras</div>
+        <div class="category-text">Livros de fantasia</div>
+        <div class="category-text">Livros de atividades</div>
+        <div class="category-text">Livros de aprendizado e educação</div>
+    </div>
+</div>
+
+</body>
+</html>
