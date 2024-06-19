@@ -2,100 +2,197 @@
 <html lang='pt-br'>
 <head>
     <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livraria Miúda</title>
     <style>
-        /* Estilo para o header branco */
-        header {
-          background-color: white;
-          height: 100px;
-          border-bottom: 1px solid #ccc;
-          display: flex;
-          align-items: center;
-          padding: 0 20px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          font-weight: bold;
-          font-family: Helvetica, sans-serif;
+        body {
+            margin: 0;
+            font-family: Helvetica, sans-serif;
         }
 
-        /* Estilos para as linhas animadas */
+        header {
+            background-color: white;
+            height: 100px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header img {
+            height: 60px;
+            margin: 0 10px;
+        }
+
+        .responsive-icon {
+            max-width: 30px;
+            height: auto;
+            filter: invert(26%) sepia(89%) saturate(3800%) hue-rotate(220deg) brightness(93%) contrast(97%);
+        }
+
+        .search-bar-container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 25px 0 0 25px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+
+        .search-bar button {
+            background-color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0 25px 25px 0;
+        }
+
+        .search-bar button img {
+            width: 20px;
+            height: auto;
+            filter: invert(26%) sepia(89%) saturate(3800%) hue-rotate(220deg) brightness(93%) contrast(97%);
+        }
+
         .lines-container {
-          display: flex;
-          flex-direction: column;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 100px; /* Ajustar de acordo com a altura do cabeçalho */
+            width: 100%;
+            z-index: 999;
         }
 
         .line {
-          height: 5px;
-          transition: height 0.6s;
+            height: 5px;
+            transition: height 0.6s;
         }
 
-        #line1 {
-          background-color: #FDBB13;
+        .line-yellow {
+            background-color: #FDBB13;
         }
 
-        #line2 {
-          background-color: #153383;
+        .line-blue {
+            background-color: #153383;
         }
 
-        #line3 {
-          background-color: #C84567;
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: height 0.6s;
+        .line-pink {
+            background-color: #C84567;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: height 0.6s;
+            text-align: center;
         }
 
-        /* Estilo para os textos das categorias */
         .category-text {
-          margin: 0 10px;
-          color: white;
-          font-weight: bold;
-          font-family: Helvetica, sans-serif;
-          opacity: 0;
-          transition: opacity 0.6s;
+            margin: 0 10px;
+            color: white;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.6s;
         }
 
-        /* Animação ao passar o mouse */
-        .lines-container .line:hover {
-          height: 30px;
+        .line:hover {
+            height: 30px;
         }
 
-        /* Aumentar a altura da linha 3 */
-        .lines-container #line3:hover {
-          height: 60px;
+        .line-pink:hover {
+            height: 60px;
         }
 
-        /* Recolhimento das linhas anteriores */
-        .lines-container #line2:hover ~ #line1 {
-          height: 5px;
+        .line-pink:hover .category-text {
+            opacity: 1;
         }
 
-        .lines-container #line3:hover ~ #line1,
-        .lines-container #line3:hover ~ #line2 {
-          height: 5px;
+        .lines-container .line-yellow:hover,
+        .lines-container .line-blue:hover ~ .line-yellow,
+        .lines-container .line-pink:hover ~ .line-yellow,
+        .lines-container .line-pink:hover ~ .line-blue {
+            height: 5px;
         }
 
-        /* Aparecimento dos textos das categorias quando a linha rosa está expandida */
-        .lines-container #line3:hover .category-text {
-          opacity: 1;
+        .header-left, .header-right {
+            display: flex;
+            align-items: center;
         }
 
-        /* Centralizar textos das categorias */
-        .lines-container #line3 {
-          text-align: center;
+        .header-left img {
+            margin-right: 30px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-right .menu-icon {
+            margin-right: 30px;
+        }
+
+        .content {
+            margin-top: 160px; /* Ajuste para cobrir a altura do cabeçalho e das linhas */
+            padding: 20px;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Livraria Miúda</h1>
+    <div class="header-left">
+        <img src="img/logomiuda.png" alt="Logo Miúda">
+    </div>
+    <div class="search-bar-container">
+        <div class="search-bar">
+            <input type="text" placeholder="Escreva o nome do livro ou autor">
+            <button>
+                <img src="img/lupa.png" alt="Search">
+            </button>
+        </div>
+    </div>
+    <div class="header-right">
+        <img src="img/cart.svg" alt="Cart" class="responsive-icon">
+        <img src="img/profile.svg" alt="Profile" class="responsive-icon">
+        <img src="img/menu.svg" alt="Menu" class="responsive-icon menu-icon">
+    </div>
 </header>
 
 <div class="lines-container">
-    <div id="line1" class="line"></div>
-    <div id="line2" class="line"></div>
-    <div id="line3" class="line">
+    <div class="line line-yellow"></div>
+    <div class="line line-blue"></div>
+    <div class="line line-pink">
         <div class="category-text">Livros de séries populares</div>
         <div class="category-text">Livros de figuras</div>
         <div class="category-text">Livros de fábulas</div>
@@ -105,6 +202,16 @@
         <div class="category-text">Livros de atividades</div>
         <div class="category-text">Livros de aprendizado e educação</div>
     </div>
+</div>
+
+<div class="content">
+    <p>Lorem ipsum dolor sit amet. Ut modi optio ea earum placeat ut unde impedit! In ipsa labore quo omnis galisum eos labore tempora id perferendis voluptate ut nulla magni non molestias adipisci. Ea eveniet sint qui totam internos est praesentium maxime. </p>
+    <p>Non deserunt nihil quo atque laboriosam cum autem repudiandae. Ut laudantium neque ut voluptas dolore sit enim quas quo neque iste in vero ipsum. </p>
+    <p>Quo possimus exercitationem et perferendis sunt At commodi magni ea illum odit. Non eveniet cumque ea nihil suscipit quo laborum perferendis ea totam deleniti aut quos Quis et aliquam reprehenderit et vitae debitis. </p>
+    <p>Sed quod modi ad quia nihil eum corporis atque et quaerat quia quo impedit molestiae a cupiditate officiis? Est minima recusandae ex autem inventore et suscipit maxime? </p>
+    <p>Et quam itaque At optio pariatur est dolore veniam ut dolore aspernatur ad enim nisi ex nihil expedita. In galisum sequi rem sint placeat qui eligendi animi et eligendi odio sit deserunt beatae et nesciunt quia qui accusamus animi. Est quos quia a quisquam internos aut ducimus incidunt vel veritatis autem aut officiis accusamus. Et saepe illum vel repellat cupiditate ab deserunt maiores eos error dolores ab ipsa ducimus? </p>
+    <p>Et enim placeat ea ipsum possimus quo accusamus eveniet 33 dolore praesentium est blanditiis delectus sit culpa animi est doloremque veniam. Et tenetur molestias hic fugiat galisum qui quae distinctio a neque quibusdam ut galisum voluptas a quas corporis. Aut facilis odit vel error enim est sapiente dolores et quidem quos 33 amet cumque qui nesciunt eaque. </p>
+    <p>Ex consequatur rerum quo adipisci consequatur ut velit quisquam et dolorum accusantium et illum voluptatem id saepe doloremque. Eos aliquid blanditiis aut veritatis sequi vel libero minima et internos vero sed repellendus eveniet. Et omnis dolor vel Quis corporis aut ipsum libero hic odit repudiandae quo explicabo similique! </p>
 </div>
 
 </body>
